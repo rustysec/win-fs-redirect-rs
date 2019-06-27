@@ -1,0 +1,9 @@
+[package]
+name = "win-fs-redirect"
+version = "0.1.0"
+authors = ["Russ <russ@infocyte.com>"]
+edition = "2018"
+
+[dependencies]
+winapi = { version = "0.3", features = [ "wow64apiset", "errhandlingapi" ] }
+log = "0.4"
