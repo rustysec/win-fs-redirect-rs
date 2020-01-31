@@ -1,0 +1,25 @@
+name: Build
+
+on: [push]
+
+jobs:
+  msvc32:
+
+    name: MSVC 32bit Build
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install 32bit MSVC Target
+      uses: actions-rs/toolchain@v1
+      with:
+          toolchain: nightly
+          target: i686-pc-windows-msvc
+          override: true
+          default: true
+
+    - name: Build 32bit MSVC
+      run: cargo build --target=i686-pc-windows-msvc
+
+    - name: Test 32bit MSVC
+      run: cargo test --target=i686-pc-windows-msvc

@@ -1,4 +1,5 @@
-//! # win-fs-redirect
+//! win-fs-redirect
+//! ===============
 //! A very simple wrapper to help with Wow64 filesystem redirection.
 //!
 //! # Problem
@@ -18,7 +19,8 @@
 //! ergonomic way to overcome this behavior.
 //!
 //! # Example
-//! ```rust
+//!
+//! ```no_run
 //! use win_fs_redirect::DisableFsRedirection;
 //!
 //! fn main() {
@@ -37,11 +39,13 @@
 //! ```
 //!
 //! The output of this is something along the lines of:
-//! ```
+//!
+//! ```ignore
 //! - file size: 649064
 //! + file size: 725696
 //! - file size: 649064
 //! ```
+//!
 //! (file sizes will differ on your system)
 //!
 //! Notice here the line with the `+` is the only one inside the block with redirection disabled.
@@ -62,8 +66,9 @@ impl DisableFsRedirection {
     /// Returns a `Result` containing either a `DisableFsRedirection` or
     /// an `Error<u32>` with the error code from Windows.
     ///
-    /// # Example
-    /// ```
+    /// # Examples
+    ///
+    /// ```no_run
     /// DisableFsRedirection::start().map(|_| {
     ///     // access normally redirected files
     /// });
@@ -89,7 +94,7 @@ impl Drop for DisableFsRedirection {
     }
 }
 
-#[cfg(test)]
+#[cfg(all(test, windows, target_pointer_width = "32"))]
 mod tests {
     #[test]
     fn kernel32_size() {
@@ -104,9 +109,7 @@ mod tests {
                     .len();
                 assert!(s1 != s);
             })
-            .map_err(|e| {
-                println!("Error: {}", e);
-                assert!(false)
-            });
+            .map_err(|_| assert!(false))
+            .unwrap();
     }
 }

@@ -1,5 +1,8 @@
-# win-fs-redirect
-A very simple wrapper to help with Wow64 filesystem redirection.
+win-fs-redirect
+===============
+[![Build Status](https://github.com/rustysec/win-fs-redirect-rs/workflows/Build/badge.svg)](https://github.com/rustysec/win-fs-redirect-rs/actions)
+
+A very simple wrapper to help with Wow64 file system redirection.
 
 # Problem
 64 bit versions of Microsoft Windows implement a set of capabilities referred to as
